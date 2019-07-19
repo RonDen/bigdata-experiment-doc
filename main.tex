@@ -1,0 +1,54 @@
+% !Mode:: "TeX:UTF-8"
+% !TEX TS-program = xelatex
+\documentclass[UTF8]{report}
+% \documentclass[UTF8]{report}
+
+\usepackage[zihao=-4,heading=true]{ctex}
+\usepackage{geometry}
+\geometry{left=2.0cm, right=2.0cm, top=2.0cm, bottom=2.0cm}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{graphicx} % used for add figure to this report
+\graphicspath{{img/}}
+\usepackage{listings}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{booktabs}
+\usepackage[toc]{multitoc}
+\usepackage{graphics}
+\usepackage{subfig}
+\usepackage{enumerate}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage[section]{placeins}
+
+\input{code_format.sty}
+
+\begin{document}
+	\input{head_page.tex}
+	
+	\tableofcontents
+	\newpage
+
+\input{section1.tex}
+
+\input{section2.tex}
+
+\input{zookeeper.tex}
+
+\input{hadoop.tex}
+
+\input{hive.tex}
+
+\input{hbase.tex}
+
+\input{spark.tex}
+
+\input{flume.tex}
+
+\input{sqoop.tex}
+
+
+\input{kafka.tex}
+
+\input{storm.tex}
+
+\end{document}

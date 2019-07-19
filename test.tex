@@ -1,0 +1,35 @@
+% !Mode:: "TeX:UTF-8"
+% !TEX TS-program = xelatex
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{libertine}
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage{blindtext}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+
+
+% \titleformat*{\section}{\LARGE\bfseries\sffamily}
+
+% \titleformat*{\subsection}{\Large\itshape}
+
+\titleformat{\section}
+            {\LARGE\bfseries\sffamily\color{RoyalBlue}}
+            {\includegraphics[height=2em]{img/hadoop/hadoop2.png} \thesection{}.}
+            {1em}
+            {\huge\scshape\fbox}
+            % {}
+            % []
+\titleformat{\subsection}
+            {\Large\itshape\sffamily\color{BrickRed}}
+            {\thesubsection.}
+            {5pt}
+            {}
+            % []
+\begin{document}
+
+\blinddocument
+
+\end{document}

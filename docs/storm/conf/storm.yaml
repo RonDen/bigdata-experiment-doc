@@ -1,0 +1,20 @@
+########### These MUST be filled in for a storm configuration
+storm.zookeeper.servers:
+    - "master"
+    - "slave1"
+    - "slave2"
+nimbus.seeds: ["slave1", "slave2"]
+ui.port: 9090
+supervisor.slots.ports:
+  - 6700
+  - 6701
+  - 6702
+  - 6703
+storm.local.dir: "/home/zhangyu/storm/data"
+storm.health.check.dir: "healthchecks"
+storm.health.check.timeout.ms: 5000
+## Locations of the drpc servers
+drpc.servers:
+    - "master"
+    - "slave1"
+    - "slave2"

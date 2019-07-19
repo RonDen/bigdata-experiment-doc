@@ -1,0 +1,5 @@
+import
+--connect
+jdbc:mysql://localhost/db
+--username
+foo

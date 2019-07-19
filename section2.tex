@@ -1,0 +1,69 @@
+
+\section{搭建分布式Hadoop}
+\label{sec:hadoop_install}
+\subsection{简介}
+Hadoop包含了3个核心组件，分别是
+\begin{itemize}
+	\item HDFS分布式文件系统
+	\item Mapreduce并行计算框架
+	\item YARN集群资源调度管理工具
+\end{itemize}
+这三项是整个生态系统的核心组件，如果没有配置好，后面的操作都无法完成，同时
+也是最难配置的一块，因此也是我花了最多时间的一部分。
+
+首先从分布式配置开始，尽管仅有\lstinline{SecondaryNameNode}的分布式配置
+可用性、可靠性都不高，但是是所有配置的基础。
+
+\subsection{配置文件}
+
+在配置好JDK1.8和SSH免密码登录后，配置分布式Hadoop就比较简单了，只需要修改5个配置文件：
+
+\lstinline{core-site.xml}，\lstinline{hdfs-site.xml}，\lstinline{yarn-site.xml}，
+\lstinline{mapred-site.xml}，和\lstinline{hadoop-env.sh}。
+\lstinputlisting[style=myxml,title=core-site.xml]{docs/hadoop/hadoop/normal.core-site.xml}
+在简单分布式模式下，\lstinline{core-site.xml}只要设置Hadoop数据保存的目录和对外暴露的名称节点
+端口即可。这里是Master。
+\lstinputlisting[style=myxml,title=hdfs-site.xml]{docs/hadoop/hadoop/normal.hdfs-site.xml}
+\lstinline{hdfs-site.xml}设置的是名称节点的元数据和数据节点的数据的本地保存位置。以及数据的副本数，
+这里设置为1，减小机器负担，默认为3。还有其他用户访问的权限检查，这里设置为\lstinline{false}，
+减少后面的麻烦。
+\lstinputlisting[style=myxml,title=yarn-site.xml]{docs/hadoop/hadoop/normal.yarn-site.xml}
+\lstinline{yarn-site.xml}这里设置的\lstinline{yarn.nodemanager.aux-services}是指定YARN获取
+数据的方式，从MapReduce中获取。
+\lstinputlisting[style=myxml,title=mapred-site.xml]{docs/hadoop/hadoop/normal.mapred-site.xml}
+其中指定调度MapReduce作业的框架为YARN。
+在\lstinline{hadoop-env.sh}中写入：
+\begin{lstlisting}[title=hadoop-env.sh, style=mysh]
+export JAVA_HOME=/opt/java/
+export HADOOP_HOME=/opt/hadoop
+export HADOOP_CONF_DIR=${HADOOP_HOME}/etc/hadoop
+\end{lstlisting}
+用于找到\lstinline{JAVA_HOME}，\lstinline{HADOOP_HOME}，以及Hadoop配置文件的位置等信息。
+\subsection{启动查看}
+首先用Jps查看系统中的Java进程。分别到不同节点上去\lstinline{jps}。
+\begin{lstlisting}[style=mysh,title=Master节点]
+1020 DataNode
+1522 NodeManager
+1419 ResourceManager
+1892 Jps
+1224 SecondaryNameNode
+860 NameNode
+\end{lstlisting}
+\begin{lstlisting}[style=mysh,title=Slave1节点]
+1991 Jps
+1020 DataNode
+1522 NodeManager
+\end{lstlisting}
+\begin{lstlisting}[style=mysh,title=Slave2节点]
+4850 Jps
+3050 DataNode
+2876 NodeManager
+\end{lstlisting}
+其中，主节点上有5个进程，从节点上有3个进程，编号不是重要的。\lstinline{DataNode}和\lstinline{NameNode}
+以及Master上的\lstinline{SecondaryNameNode}，是HDFS启动时需要的进程；\lstinline{NodeManager}和\lstinline{ResourceManager}
+是YARN启动后需要看到的进程。
+
+也可以在浏览器中查看Web端口的运行情况，这个在后面HA部分\ref{subsec:hadoop_web}详述。
+
+如果没有正常启动，可以查看Hadoop目录下面的\lstinline{logs\}文件夹下面查找日志情况。日志一般比较长，可以直接
+到最后查看报错信息即可。该配置比较简单，多半是通信或者配置语法错误导致。

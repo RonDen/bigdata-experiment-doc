@@ -1,0 +1,65 @@
+\section{安装Sqoop}
+
+\subsection{简介}
+Sqoop是一种数据导入和导出的工具，方便将关系型数据库（RDBMS）如MySQL、Oracle中的数据
+导入到HDFS、Hive或者是HBase中，从而可以通过Mapreduce或在Spark程序进行处理，再将结果导出到RDBMS中。也是一个比较重要且实用的工具。
+
+\subsection{安装配置}
+
+\lstinputlisting[style=mysh, title=sqoop-env.sh]{docs/sqoop/conf/sqoop-env.sh}
+
+\subsection{测试和运用}
+
+将配置好的\lstinline{sqoop/}文件夹分发到各台机器上，即可开始使用。
+
+可以输入\lstinline{sqoop help}查看命令帮助。
+
+\lstinputlisting[style=mysh,title=sqoop help]{docs/sqoop/sqoop-help.sh}
+
+Sqoop的基本用法如下：
+
+\lstinputlisting[style=mysh, title=use-sqoop.sh]{docs/sqoop/use-sqoop.sh}
+
+当然也可以用一些命令的别名\lstinline{sqoop-toolname}，这样更加简短，如\lstinline{sqoop-import}导入数据，
+\lstinline{sqoop-export}导出数据等。
+
+有时在Shell中输入长串的命令很容易输错，Sqoop可以通过加载配置选项文件的方式
+来设定。
+
+\begin{lstlisting}[style=mysh]
+$ sqoop --options-file /users/homer/work/import.txt --table TEST
+\end{lstlisting}
+
+\lstinputlisting[style=mysh,title=import.txt]{docs/sqoop/import.txt}
+
+上面命令等同于：
+
+\begin{lstlisting}[style=mysh]
+$ sqoop import --connect jdbc:mysql://localhost/db --username foo --table TEST
+\end{lstlisting}
+
+可以在options file里面加入空行、注释等，使其可读性更高。
+
+使用Sqoop时可能会报一些错误，主要是MySQL数据库连接的错误，要提前将\lstinline{mysql-connector-xxx.jar}文件
+拷贝到\lstinline{sqoop/lib}文件夹下，而且驱动的版本也要合适，否则也会报错。
+
+在连接到数据库服务器时，有一些点值得注意：
+
+Sqoop连接数据库的语法是这样的：
+
+\begin{lstlisting}[style=mysh,title=Sqoop连接数据库的语法]
+$ sqoop import --connect jdbc:mysql://database.example.com/employees
+\end{lstlisting}
+
+需要注意的是，最好不要用\lstinline{localhost}这样的地址，因为在
+Sqoop中，是一个分布式的数据导入导出工具，如果指定为\lstinline{localhost}
+那么每台机器都会在自己的\lstinline{localhost}上连接，这样必然连接失败，
+因此要指定明确的ip地址或者是hostname。可以通过指定\lstinline{--username}和
+\lstinline{--password}或\lstinline{--password-file}来获取数据库授权。
+
+可以在导入数据时通过\lstinline{--query}指定查询数据库语句来选择性导入表中
+数据。
+
+\lstinputlisting[style=mysh,title=query-example]{docs/sqoop/query-example.sh}
+
+\lstinline{-m}表明并行执行的MapReduce任务数。

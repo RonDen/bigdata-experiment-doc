@@ -1,0 +1,99 @@
+
+	\lstdefinestyle{customcpp}{
+		numbers=left,
+		numberstyle=\tiny,
+		belowcaptionskip=1\baselineskip,
+		breaklines=true,
+		xleftmargin=\parindent,
+		language=C++,
+		showstringspaces=false,
+		basicstyle=\footnotesize\ttfamily,
+		keywordstyle=\bfseries\color{green!40!black},
+		commentstyle=\itshape\color{purple!40!black},
+		identifierstyle=\color{blue},
+		stringstyle=\color{orange},
+	}
+	
+	\lstdefinestyle{customjava} {
+	language=Java,
+	backgroundcolor=\color{lightgray},
+	breaklines=true,
+	% numbers=left,
+	% numberstyle=\tiny,
+	basicstyle=\ttfamily,
+	keywordstyle=\bfseries\color{green!40!black},
+	commentstyle=\itshape\color{purple!40!black},
+	identifierstyle=\color{blue},
+	stringstyle=\color{orange},
+}	
+
+\lstdefinestyle{myxml} {
+    backgroundcolor=\color{lightgray},
+	language=XML,
+	breaklines=true,
+    % numbers=left,
+	% numberstyle=\tiny,
+	basicstyle=\ttfamily,
+	keywordstyle=\bfseries\color{green!40!black},
+	commentstyle=\itshape\color{purple!40!black},
+	identifierstyle=\color{blue},
+	stringstyle=\color{orange},
+}
+\lstdefinestyle{mysh} {
+    backgroundcolor=\color{lightgray},
+	language=sh,
+	breaklines=true,
+    % numbers=left,
+	% numberstyle=\tiny,
+	basicstyle=\ttfamily,
+	keywordstyle=\bfseries\color{green!40!red},
+	commentstyle=\itshape\color{purple!40!black},
+	identifierstyle=\color{blue},
+	stringstyle=\color{orange},
+}
+\lstdefinestyle{mysql} {
+    backgroundcolor=\color{lightgray},
+	language=SQL,
+	breaklines=true,
+	basicstyle=\ttfamily,
+	keywordstyle=\bfseries\color{green!40!red},
+	commentstyle=\itshape\color{purple!40!black},
+	identifierstyle=\color{blue},
+	stringstyle=\color{orange},
+}
+
+
+\lstdefinestyle{normal} {
+	language=sh,
+	basicstyle=\ttfamily,
+	breaklines=true,
+	keywordstyle=\bfseries\color{green!40!red},
+	commentstyle=\itshape\color{purple!40!black},
+	identifierstyle=\color{blue},
+	stringstyle=\color{orange},
+}
+
+\lstset{style=normal}
+
+\ctexset {
+part/pagestyle = empty,
+chapter = {
+    format = \raggedright,
+    pagestyle = empty,
+},
+section = {
+    name = {第,部分},
+    number = \chinese{section},
+},
+subsection = {
+    name = {第,节},
+    number = \chinese{subsection},
+}
+}
+\pagestyle{fancy}
+
+\titleformat{\section}
+            {\LARGE\bfseries\sffamily\color{RoyalBlue}}
+            {\includegraphics[height=2em]{hadoop/hadoop2.png} \thesection{}.}
+            {1em}
+            {\huge\scshape}

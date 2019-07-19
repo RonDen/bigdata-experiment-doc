@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" 
+        href="configuration.xsl"?>
+<configuration>
+   <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://ldcluster</value>
+    </property>
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/data/tmp/hadoop/tmp</value>
+    </property>
+    <property>
+        <name>ha.zookeeper.quorum</name>
+        <value>master:2181,slave1:2181,slave2:2181,slave3:2181</value>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.zhangyu.hosts</name>
+        <value>*</value>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.zhangyu.groups</name>
+        <value>*</value>
+    </property>
+</configuration>

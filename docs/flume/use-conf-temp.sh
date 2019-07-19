@@ -1,0 +1,1 @@
+ bin/flume-ng agent -n agent -c conf -f conf/flume-conf.properties
