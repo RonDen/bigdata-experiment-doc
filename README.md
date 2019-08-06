@@ -1,6 +1,6 @@
 # 大数据平台搭建实验手册
 
-本文档又[XeTeX](http://xetex.sourceforge.net/)编译，采用texlive2019发行版。
+本文档由[XeTeX](http://xetex.sourceforge.net/)编译，采用texlive2019发行版。
 环境为VS Code，[LaTeX Workshop](https://github.com/James-Yu/LaTeX-Workshop)插件提供支持。
 文档基本内容如下：
 
